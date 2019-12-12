@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var input
+		function InputText(){
+			this.make = function(type){
+				const inputText = document.createElement('input')
+				inputText.setAttribute('type','text')
+				inputText.setAttribute('id','val')
+				return inputText
+			}
+		}
+		function Br(){
+			this.make = function(){
+				const br = document.createElement('br')
+				return br
+			}
+		}
+		function InputButton(){
+			this.make = function(){
+				const inputButton = document.createElement('input')
+				inputButton.setAttribute('type','button')
+				inputButton.setAttribute('value','버튼')
+				inputButton.setAttribute('id','btn')
+
+				return inputButton
+			}
+		}
+		function Func02(){
+			this.play = function(){
+				if(input == undefined || input == null || input == ''){
+					alert('텍스트 필드를 입력하세요')
+				}else{
+					alert((input.value !== '') ? input.value : '먼저 입력하시오')
+					input.focus()
+				}
+				choice.value = 0
+			}
+		}
+		factory = function(type) {
+			switch(type){
+				case 'inputText' : return new InputText()
+				case 'inputButton' : return new InputButton()
+				case 'br' : return new Br()
+				}
+		}
+		window.onload = () => {
+			const inputText = factory('inputText')
+			const inputButton = factory('inputButton')
+			const br = factory('br')
+
+			document.body.appendChild(inputText.make())
+			document.body.appendChild(br.make())
+			document.body.appendChild(inputButton.make())
+
+			document.getElementById('btn').onclick = function (){
+				let str = document.getElementById('val').value
+				document.body.innerText += str
+			}
+/* 			const cho = document.getElementsByTagName('choice')
+			cho[0].onchange = function(){
+				if(this.value != 0){
+					const obj = factory(this.value)
+					obj.play(this)
+				}
+			} */
+
+		}
+	</script>
+</body>
+</html>

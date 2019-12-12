@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="Component.js"></script>
+	<title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+		window.onload = () => {
+ 			const loop = new Looping()
+				console.log('forTest : '+loop.forTest([1,2,3,4,5,6,7,8,9,10]))
+				console.log('forEachTest : '+loop.forEachTest([13,14,15,16,17]))
+				console.log('filterTest : '+loop.filterTest([13,14,15,16,17]))
+				console.log('MapTest : '+loop.MapTest([1,2,3,4,5,6,7,8,9,10]))				
+				console.log('findTest : '+loop.findTest([4,12,16,20]))				
+				console.log('findTest 2: '+loop.findTest2([{id :4 , name : '권' }
+													,{id :5 , name : '혜' }
+													,{id :8 , name : '령' }
+													,{id :9 , name : '은' }] , 10))		
+				console.log('reduceTest : '+loop.reduceTest([1,2,3,4,5]))	
+				console.log('ofTest : '+loop.ofTest([{id :4 , name : '권' }
+													,{id :5 , name : '혜' }
+													,{id :8 , name : '령' }
+													,{id :9 , name : '은' }] ))
+				console.log('fromTest : '+loop.fromTest([1,2,3,4,5]))														
+				console.log('argumentTest : '+loop.argumentTest([1,2,3,4,5]))														
+				console.log('joinTest : '+loop.joinTest('1','1','1','1',' '))		
+				console.log('sortTest  : '+loop.sortTest('Banana','Orange','Subak','DDalki'))		
+				console.log('reverseTest  : '+loop.reverseTest('Banana','Orange','Subak','DDalki'))		
+				console.log('todos  : '+loop.todos([
+						{ id: 4, content: 'JavaScript' },
+						{ id: 1, content: 'HTML' },
+						{ id: 2, content: 'CSS' }
+				]))												
+
+			}	
+	</script>
+
+</body>
+</html>

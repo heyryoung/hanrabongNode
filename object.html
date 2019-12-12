@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<div id ="box"></div>
+<script>
+window.onload = function (){
+
+		function Person(name,gender){let _name, _gender,_age}
+
+		Person.prototype.getName = function (){return _name}
+		Person.prototype.getGender = function (){return _gender}
+		Person.prototype.getAge = function (){return _age}
+		Person.prototype.setName = function (name){_name = name}
+		Person.prototype.setGender = function (gender){_gender = gender}
+		Person.prototype.setAge = function (age){_age = age}
+		Person.prototype.toString = function (){alert('dsdf')}
+
+		let person = new Person('ds','sd','sd')
+		console.log(person.getName())
+
+
+		function Member(name, gender){
+			this.name = name ;
+			this.gender = gender;
+				this.getName = function (){
+					return this.name
+				}
+				this.getGender = function (){
+					return this.gender
+				}			
+			this.push = function(){
+						console.log('Hi! My name is ' + this.name);
+			}
+		}
+		const inputText = document.createElement('input');
+		const genderText = document.createElement('input');
+		const btn = document.createElement('input');
+		
+		inputText.setAttribute('type','text')
+		inputText.setAttribute('id','nameText')
+		genderText.setAttribute('type','text')
+		genderText.setAttribute('id','genderText')
+		btn.setAttribute('type','button')
+		btn.setAttribute('value','submit')
+
+		document.body.appendChild(inputText)
+		document.body.appendChild(genderText)
+		document.body.appendChild(btn)
+		
+		btn.onclick = function (){
+			let member = new Member(document.getElementById('nameText').value, document.getElementById('genderText').value);
+			member.push()
+			document.getElementById('box').innerText = member.getName() + member.getGender()
+		} 
+	}
+
+/* 
+(function(){
+
+	const template =  `<body class="text-center">
+		<form class="form-signin" id="form_join">
+		     <img class="mb-4" src="https://pds.joins.com/news/component/htmlphoto_mmdata/201910/26/ce877ed2-0800-457f-b9a6-a86044718d40.jpg" alt="" width="300" height="200">
+		     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		     <label for="cid" class="sr-only">ID</label>
+		     <input type="text" id="cid" class="form-control" placeholder="" required="" autofocus="" ><br/>
+		     <label for="cpw" class="sr-only">PW</label>
+		     <input type="password" id="cpw" class="form-control" placeholder="" required="" >
+		     <div class="checkbox mb-3">
+		       <label>
+		         <a id="a_go_join" href="#"> GO JOIN</a>
+		       </label>
+		       <label>
+		       <a id = "a_go_admin" href="#">관리자모드</a> 
+		       </label> 		
+		     </div> 
+		     <div id="btn_login"/> 
+		     <p class="mt-5 mb-3 text-muted">© 2017-2019</p> 
+		   </form> 
+		 </body> `
+		 const box = document.getElementById('box')
+		 box.innerHTML= template
+
+})();	 */
+</script>	
+</body>
+</html>

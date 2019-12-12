@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="Animal.js"></script>
+	<script src="AnimalService.js"></script>
+	<title>Document</title>
+</head>
+<body>
+<script>
+
+	window.onload = function(){
+		const init = new Initializer()
+		init.animal()
+		const a = new Animal()
+		a.setName('Cat')
+		console.log(` animal name : ${a.getName()}`)
+		init.human()
+		let b = new Human()
+		b.setName('hong')
+		console.log(`human name :  ${b.test()}`)
+		init.superHero()
+		let c = new SuperHero()
+		c.setName('SPM')
+		console.log(`superhero : ${c.exam()}`)
+		console.log(`human name :  ${b.test()}`)
+
+	}
+	
+	
+	</script>	
+</body>
+</html>

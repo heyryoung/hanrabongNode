@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="VendingMachineService.js"></script>
+	<script src="VendingMachineUtil.js"></script>
+	<script src="VendingMachine.js"></script>
+	<script src="Component.js"></script>	
+	<title>Document</title>
+</head>
+<body>
+
+	<!-- 
+	공유하는 프로퍼티 :  change, itemNo, itemNoList, itemList
+	공유하는 메소드 : 
+	insertCoin : insertCoin(coin)
+	selectItem : selectItem(itemNo, quantity)
+	returnChange : returnChange()
+	handleOrder(quantity, price, itemName, stock )
+
+	 --> 
+<script>
+
+
+		window.onload = function() {
+			const selectItem = {}
+			const vdm = new VendingMachine() 
+			const inputText = compo.inputText('inputText')
+			const inputButton = compo.inputButton('btn', 'submit')
+			const br = compo.br()
+			const menuContainer = compo.div('menucontainer','')
+			const selectCntContainer = compo.div('selectcntcontainer','')
+			
+			document.body.appendChild(inputText)
+			document.body.appendChild(br)
+			document.body.appendChild(inputButton)
+			document.body.appendChild(menuContainer)			
+
+
+			document.getElementById('btn').addEventListener('click',function(){
+				 const inputValue = document.getElementById('inputText') 	
+				alert(` 얼마? : ${service.insertCoin(inputValue.value)}`)
+				showMenu()
+			})
+
+			function showMenu(){
+ 				const init = service.vendingMachine()
+
+				vdm.setItemNoList([101,201,301,401])	
+				vdm.setItemList([{id :101 , name : '콜라'  , price : 1400, img : 'https://st.depositphotos.com/1007097/3992/i/950/depositphotos_39926881-stock-photo-coke-cola-033l-can.jpg' }
+											, {id:201 ,name : '제로콜라'  , price : 1000, img : 'http://www.suto.co.kr/data/ckeditor/1703/2010059413_1489551468.4232.jpg' }
+											, {id:301, name: '라이트콜라'  , price : 1800, img : 'https://previews.123rf.com/images/akulamatiau/akulamatiau1501/akulamatiau150100830/35730471-%EC%BF%A0%EC%95%8C%EB%9D%BC-%EB%A3%B8%ED%91%B8%EB%A5%B4-%EB%A7%90%EB%A0%88%EC%9D%B4%EC%8B%9C%EC%95%84-2014-%EB%85%84-1-%EC%9B%94-6-%EC%9D%BC-%EC%BD%94%EC%B9%B4%EC%BD%9C%EB%9D%BC-%EB%B9%9B%EC%9D%98-%EC%88%98-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-%EC%9D%BC%EB%B6%80-%EA%B5%AD%EA%B0%80%EC%9D%98-%EC%BD%94%EC%B9%B4%EC%BD%9C%EB%9D%BC-%EB%9D%BC%EC%9D%B4%ED%8A%B8-%EB%98%90%EB%8A%94-%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8-%EC%BD%9C%EB%9D%BC%EB%8A%94-the-coca-cola-company%EA%B0%80-%EC%83%9D%EC%82%B0.jpg' } 
+											, {id:401, name: '커피콜라'  , price : 1900, img : 'http://img.vogue.co.kr/vogue/2019/03/style_5c8b2574b8d0e.jpg' }])					
+				let tempItemList = vdm.getItemList()
+				const tempItemNoList = vdm.getItemNoList()		
+					
+
+				for (let index = 0; index < tempItemNoList.length; index++) {
+							menuContainer.appendChild(compo.div(tempItemNoList[index]
+								, (index+1) +'. '+tempItemList[index].name + ',  ' + tempItemList[index].price+' 원' )
+							)
+							.addEventListener('click' 
+								, function(){
+									this.selectItem =  service.selectItem(tempItemNoList[index])
+									showInputCnt(index)
+								}
+							) 
+				}
+			}
+
+			function showInputCnt(){
+					const inputCntTxt = compo.inputText('inputcnt')
+					const selectCntBtn = compo.inputButton('selectcnt', 'select number')	
+									
+					document.body.appendChild(inputCntTxt)
+					document.body.appendChild(br)
+					document.body.appendChild(selectCntBtn)
+					
+					selectCntBtn.addEventListener('click',function(){
+						//vdm.getItemNo()
+						const tempimg =  compo.img(vdm.getItemList().find(i=>i.id == vdm.getItemNo()).img)
+						const resultVal = compo.div('result',service.returnChange(document.getElementById('inputcnt').value)+' 원 ')
+						document.body.appendChild(br)
+						document.body.appendChild(tempimg) 						
+						document.body.appendChild(resultVal) 		
+						document.getElementById('img').before(selectCntBtn)								
+					})
+			} 
+	}
+
+</script>	
+
+</body>
+</html>
