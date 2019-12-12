@@ -37,7 +37,7 @@
 			document.body.appendChild(br)
 			document.body.appendChild(inputButton)
 			document.body.appendChild(menuContainer)			
-
+			document.body.appendChild(selectCntContainer)			
 
 			document.getElementById('btn').addEventListener('click',function(){
 				 const inputValue = document.getElementById('inputText') 	
@@ -57,9 +57,21 @@
 				const tempItemNoList = vdm.getItemNoList()		
 					
 
-				for (let index = 0; index < tempItemNoList.length; index++) {
+
+				tempItemList
+					.map( i => menuContainer.appendChild( compo.div( i.id, ` ${i.name}   ${i.price} 원` ))
+					.addEventListener('click' 
+						, function(){
+								this.selectItem =  service.selectItem(i.id)
+								showInputCnt()
+							}
+						) 
+					)
+
+					//아래의 코드에서 위의 코드로 변경 	
+/* 				for (let index = 0; index < tempItemNoList.length; index++) {
 							menuContainer.appendChild(compo.div(tempItemNoList[index]
-								, (index+1) +'. '+tempItemList[index].name + ',  ' + tempItemList[index].price+' 원' )
+								, `${index+1}. ${tempItemList[index].name}   ${tempItemList[index].price} 원` )
 							)
 							.addEventListener('click' 
 								, function(){
@@ -67,25 +79,21 @@
 									showInputCnt(index)
 								}
 							) 
-				}
+				} */
 			}
 
 			function showInputCnt(){
 					const inputCntTxt = compo.inputText('inputcnt')
 					const selectCntBtn = compo.inputButton('selectcnt', 'select number')	
 									
-					document.body.appendChild(inputCntTxt)
-					document.body.appendChild(br)
-					document.body.appendChild(selectCntBtn)
+					menuContainer.appendChild(inputCntTxt)
+					menuContainer.appendChild(selectCntBtn)
 					
 					selectCntBtn.addEventListener('click',function(){
-						//vdm.getItemNo()
 						const tempimg =  compo.img(vdm.getItemList().find(i=>i.id == vdm.getItemNo()).img)
 						const resultVal = compo.div('result',service.returnChange(document.getElementById('inputcnt').value)+' 원 ')
-						document.body.appendChild(br)
-						document.body.appendChild(tempimg) 						
-						document.body.appendChild(resultVal) 		
-						document.getElementById('img').before(selectCntBtn)								
+						selectCntContainer.appendChild(tempimg) 						
+						selectCntContainer.appendChild(resultVal) 		
 					})
 			} 
 	}
